@@ -1,86 +1,109 @@
-// store the gameboard as an array inside of a Gameboard object, 
-// Your players are also going to be stored in objects
-// an object to control the flow of the game itself
-
-function Game() {
-    this.board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-    this.turn = 1
-    this.winner = ""
-}
-
-function Player(name, symbol, score = 0) {
-    this.name = name
-    this.score = score
-    this.symbol = symbol
-}
+const gameBoard = (() => {
+    let board = ["", "", "", "", "", "", "", "", ""]
     
-const ticTacToe = (function() {
-
-    const displayBoard = (board) => {
-        console.log(`${board[0]} | ${board[1]} | ${board[2]}`)
-        console.log("----------")
-        console.log(`${board[3]} | ${board[4]} | ${board[5]}`)
-        console.log("----------")
-        console.log(`${board[6]} | ${board[7]} | ${board[8]}`)
+    const getBoard = () => {
+        return board
     }
 
-    const makeMove = (game, player1, player2) => {
+    const updateBoard = (index, symbol) => {
+        board[index] = symbol
+    }
 
-        if (game.turn % 2 != 0) {
-            var currentPlayer = player1
-        } else {
-            currentPlayer = player2
-        }
+    return {getBoard, updateBoard}
+
+})()
+
+const createPlayer = (name, score = 0, symbol) => {
+    return { name, score, symbol }
+}
+    
+const ticTacToe = (() => {
+
+    let gameOver
+    let players = []
+    let currentPlayer
+    let winner
+    
+    const startGame = () => {
+        board = gameBoard.getBoard()
+        players = [createPlayer("player1", 0, "x"), createPlayer("player2", 0, "o")]
+        currentPlayer = players[0]
+        gameOver = false 
+        winner = ""
         
-        let move = window.prompt(`${currentPlayer.name}: what's your next move?`)
-    
-        game.board[parseInt(move) - 1] = currentPlayer.symbol
-        game.turn++
-    
-        ticTacToe.checkWin(game)
-        ticTacToe.displayBoard(game.board)
+        let cells = document.querySelectorAll(".cell")
+        
+        for (let cell of cells) {
+            cell.addEventListener('click', handleClick)
+        }
     }
-    
-    const checkWin = (game) => {
+
+    const resetBoard = () => { 
+
+        for (i = 0; i < 9; i++) {
+            gameBoard.updateBoard(i, "")
+        }
+
+        let cells = document.querySelectorAll(".cell")
+        
+        for (let cell of cells) {
+            cell.classList = "cell"
+        }
+    }
+
+    const handleClick = (event) => {
+        
+        let cell = event.target
+        let index = cell.id
+        let board = gameBoard.getBoard()
+
+        if (board[index] == "") {
+            gameBoard.updateBoard(index, currentPlayer.symbol)
+            cell.classList.add(currentPlayer.name)
+            if (currentPlayer == players[0]) {
+                currentPlayer = players[1] 
+            } else {
+                currentPlayer = players[0]
+            }
+            ticTacToe.checkWin() 
+        }      
+    }
+
+    const checkWin = () => {
+
+        let board = gameBoard.getBoard()
 
         const WIN_COMBOS = [[0,1,2], [3,4,5], [6,7,8], 
         [0, 3, 6], [1, 4, 7], [2, 5, 8], 
         [0, 4, 8], [2, 4, 6]]
     
         WIN_COMBOS.forEach((combo) => {
-            let subString = [game.board[combo[0]], game.board[combo[1]], game.board[combo[2]]]
-            if (subString.every((el) => el == "o")) {
-                game.winner = player1.name
-                console.log(`Winner is ${game.winner}`)
-            } else if (subString.every((el) => el == "x")) {
-                game.winner = player2.name
-                console.log(`Winner is ${game.winner}`)
-            }       
+            let subString = [board[combo[0]],board[combo[1]], board[combo[2]]]
+            if (subString.every((el) => el == "o") || subString.every((el) => el == "x")) {
+                gameOver = true
+                winner = currentPlayer
+                ticTacToe.announceWinner()
+            } else if (!board.includes("") && winner == "") {
+                gameOver = true
+                ticTacToe.announceTie()
+            }      
         })
     }
 
-    const playGame = (game, player1, player2) => {
-        while (game.winner == "") {
-            ticTacToe.makeMove(game, player1, player2)
-        }
-    }
+    const announceWinner = () => {
+        console.log(`${currentPlayer.name} won!`)
 
-    return {displayBoard, makeMove, checkWin, playGame}
+        ticTacToe.resetBoard()
+    } 
+
+    const announceTie = () => {
+        console.log("It's a tie!")
+
+        ticTacToe.resetBoard()
+    }
+ 
+    return {startGame, handleClick, checkWin, announceWinner, announceTie, resetBoard}
+
 })()
 
-player1 = new Player("ME", "o")
-player2 = new Player("YOU", "x")
-game = new Game
-
-ticTacToe.playGame(game, player1, player2)
-
-
-
-
-
-
-
-
-
-
-
+ticTacToe.startGame()   

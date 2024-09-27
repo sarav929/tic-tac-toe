@@ -17,12 +17,28 @@ body {
     border: 2px solid black;
     width: 600px;
     height: 600px;
-    display: grid;
+    display: none; /*grid*/
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
 }
 
 .cell {
     border: 2px solid red;
+    font-size: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+.winner-accouncement { 
+    border: 2px blue solid;
+    height: 200px
+}
+
+.player1 {
+    background-color: blueviolet;
+}
+
+.player2 {
+    background-color: black;
+}
