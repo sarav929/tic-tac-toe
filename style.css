@@ -1,10 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 * {
     box-sizing: border-box;
 }
 
+:root {
+    
+}
+
 body {
     margin: 0 auto;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Roboto', system-ui, sans-serif;
+}
+
+button {
+    font-family: 'Press Start 2P';
+}
+
+header {
+    margin: auto 0;
+    text-align: center;
+}
+
+main {
+    display: none;
+    grid-template-columns: repeat(3, 1fr);
 }
 
 .container {
@@ -13,9 +34,22 @@ body {
     align-items: center;
 }
 
-select {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+.player-container { 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: baseline;
+    padding: 20px;
+
+    & img {
+        width: 10rem;
+    }
+}
+
+h2 { 
+    font-family: 'Press Start 2P';
+    font-size: 1.2rem;
+    margin-top: 40px;
 }
 
 .form-container {
@@ -23,20 +57,37 @@ select {
     justify-content: center;
     align-items: center;
     text-align: center;
+}
 
-    & form {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        gap: 20px;
-    }
+form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+}
 
-    & label {
-        display: flex;
-        gap: 5px;
-        flex-direction: column;
-        
-    }
+input {
+    border: none;
+    background-color: beige;
+    border-radius: 10px;
+    padding: 5px 10px;
+}
+
+label {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    flex-direction: column;    
+}
+
+label, p {
+    text-transform: uppercase;
+    font-size: .8rem;
+    letter-spacing: .1rem;
+}
+
+.divider {
+    border-top: 3px solid #000000;
 }
 
 .pokemon-selection {
@@ -44,12 +95,22 @@ select {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     flex-direction: row;
-    gap: 20px;
+    gap: 25px;
 
     & img {
-        width: 10rem;
+        width: 8rem;
+        opacity: 70%;
     }
 
+    & img:hover {
+        opacity: 100%;
+        scale: 1.15;
+    }
+
+}
+
+h1 {
+    
 }
 
 /* HIDE RADIO */
@@ -68,7 +129,8 @@ select {
   
   /* CHECKED STYLES */
   [type=radio]:checked + img {
-    outline: 5px solid #f00;
+    opacity: 100%;
+    scale: 1.15;
   }
 
 .board-container {

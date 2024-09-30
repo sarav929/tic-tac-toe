@@ -23,6 +23,7 @@ const ticTacToe = (() => {
     let currentPlayer
     let gameOver
     let winner
+    let modal = document.getElementById('gameover')
 
     const initializeGame = () => {
 
@@ -51,6 +52,10 @@ const ticTacToe = (() => {
                 }
             }
 
+            if (player1Poke == undefined || player2Poke == undefined) {
+                alert("Both players have to select a Pokemon!")
+            }
+
             players = [createPlayer(player1Name.value, player1Poke, 'x'), 
             createPlayer(player2Name.value, player2Poke, 'o')]
             
@@ -59,12 +64,24 @@ const ticTacToe = (() => {
             gameOver = false 
             winner = ""
             form.reset()
+
+            document.getElementById('name1').innerText = players[0].name.charAt(0).toUpperCase() + players[0].name.slice(1)
+            document.getElementById('pokemon1-img').src = `img/${player1Poke}.png`
+            document.getElementById('pokemon1-name').innerText = players[0].pokemon.charAt(0).toUpperCase() + players[0].pokemon.slice(1)
+
+            document.getElementById('name2').innerText = players[1].name.charAt(0).toUpperCase() + players[1].name.slice(1)
+            document.getElementById('pokemon2-img').src = `img/${player2Poke}.png`
+            document.getElementById('pokemon2-name').innerText = players[1].pokemon.charAt(0).toUpperCase() + players[1].pokemon.slice(1)
+
+            document.querySelector('div.form-container').style.display = 'none'
+            document.querySelector('main').style.display = 'grid'
+
             startGame()
         })
     }
 
     const startGame = () => {
-        console.log(players)
+        
         let cells = document.querySelectorAll(".cell")
         
         for (let cell of cells) {
@@ -82,7 +99,7 @@ const ticTacToe = (() => {
             gameBoard.updateBoard(index, currentPlayer.symbol)
             cell.innerHTML = `<img src="img/${currentPlayer.pokemon}-s.png">`
             checkWin() 
-            
+
             if (currentPlayer == players[0]) {
                 currentPlayer = players[1] 
             } else {
@@ -94,6 +111,12 @@ const ticTacToe = (() => {
 
     const resetBoard = () => { 
 
+        modal.close()
+        currentPlayer = winner
+        board = gameBoard.getBoard()
+        gameOver = false 
+        winner = ""
+
         for (i = 0; i < 9; i++) {
             gameBoard.updateBoard(i, "")
         }
@@ -102,6 +125,8 @@ const ticTacToe = (() => {
         for (let cell of cells) {
             cell.innerHTML = ""
         }
+
+        startGame()
     }
 
     const checkWin = () => {
@@ -113,7 +138,7 @@ const ticTacToe = (() => {
         [0, 4, 8], [2, 4, 6]]
     
         WIN_COMBOS.forEach((combo) => {
-            let subString = [board[combo[0]],board[combo[1]], board[combo[2]]]
+            let subString = [board[combo[0]], board[combo[1]], board[combo[2]]]
             if (subString.every((el) => el == "o") || subString.every((el) => el == "x")) {
                 gameOver = true
                 winner = currentPlayer
@@ -125,12 +150,14 @@ const ticTacToe = (() => {
         })
     }
 
-    const announceWinner = () => {
-        console.log(`${currentPlayer.name} won!`)
+    const announceWinner = () => {   
+        modal.showModal()
+        document.getElementById('result').innerHTML = `<p class="modal-p">${currentPlayer.name} won!</p>`
     } 
 
     const announceTie = () => {
-        console.log("It's a tie!")
+        modal.showModal()
+        document.getElementById('result').innerHTML = `<p class="modal-p">"It's a tie!"</p>`
     }
  
     return {initializeGame, startGame, handleClick, checkWin, announceWinner, announceTie, resetBoard}

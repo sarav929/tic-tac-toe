@@ -9,65 +9,99 @@
 </head>
 <body>
 
+    <header><h1>Tic-Tac-Toe</h1></header>
+
     <div class="container">
 
         <div class="form-container">
 
-
             <form method="get" action="index.html" onsubmit="" id="create-players-form">
-                <h2>Player 1</h2>
-                <label for="player1-name" name="name">Name:
+                <h2>PLAYER 1</h2>
+
+                <label for="player1-name" name="name" required>Name:
                     <input type="text" id="player1-name">
                 </label>
+                <p>Select your Pokémon</p>
                 <div class="pokemon-selection">
+                    
+                    <label>
+                        <input type="radio" name="pokemon1" id="pikachu" class="poke1">
+                        <img src="img/pikachu.png">
+                    </label>  
+
                     <label>
                         <input type="radio" name="pokemon1" id="bulbasaur" class="poke1">
                         <img src="img/bulbasaur.png">
                     </label>
                       
                     <label>
-                        <input type="radio" name="pokemon1" id="charmander" class="poke1">
-                        <img src="img/charmander.png">
+                        <input type="radio" name="pokemon1" id="oddish" class="poke1">
+                        <img src="img/oddish.png">
                     </label>
 
                     <label>
-                        <input type="radio" name="pokemon1" id="pikachu" class="poke1">
-                        <img src="img/pikachu.png">
+                        <input type="radio" name="pokemon1" id="gastly" class="poke1">
+                        <img src="img/gastly.png">
                     </label>
+
+                    <label>
+                        <input type="radio" name="pokemon1" id="snorlax" class="poke1">
+                        <img src="img/snorlax.png">
+                    </label>
+ 
                 </div>
+
                 
 
-                <h2>Player 2</h2>
-                <label for="player2-name">Name:
-                    <input type="text" id="player2-name">
+                <h2>PLAYER 2</h2>
+
+                <label for="player2-name">Name
+                    <input type="text" id="player2-name" required>
                 </label>
+
+                <p>Select your Pokémon</p>
                 <div class="pokemon-selection">
+                    
                     <label>
                         <input type="radio" name="pokemon2" id="eevee" class="poke2">
                         <img src="img/eevee.png">
                     </label>
                       
                     <label>
-                        <input type="radio" name="pokemon2" id="oddish" class="poke2">
-                        <img src="img/oddish.png">
+                        <input type="radio" name="pokemon2" id="charmander" class="poke2">
+                        <img src="img/charmander.png">
                     </label>
 
                     <label>
                         <input type="radio" name="pokemon2" id="ditto" class="poke2">
                         <img src="img/ditto.png">
                     </label>
+
+                    <label>
+                        <input type="radio" name="pokemon2" id="meowth" class="poke2">
+                        <img src="img/meowth.png">
+                    </label>
+
+                    <label>
+                        <input type="radio" name="pokemon2" id="chikorita" class="poke2">
+                        <img src="img/chikorita.png">
+                    </label>
                 </div>
 
-                <button type="submit" id="start-btn">Confirm</button>
-
-                
+                <button type="submit" id="start-btn">START!</button>       
             </form>
 
         </div>
 
-        <header><h1>Tic-Tac-Toe</h1></header>
-
         <main> 
+            <div class="player-container">
+
+                <h2 id="name1"></h2>
+
+                <img id="pokemon1-img" src="">
+                <h3 id="pokemon1-name"></h3>
+
+            </div>
         
             <div class="board-container">
                 <div class="cell" id="0"></div>
@@ -81,9 +115,19 @@
                 <div class="cell" id="8"></div>
             </div>
 
-            <dialog class="gameover">
+            <div class="player-container">
+
+                <h2 id="name2"></h2>
+
+                <img id="pokemon2-img" src="">
+                <h3 id="pokemon2-name"></h3>
+
+            </div>
+
+            <dialog id="gameover">
                 <div id="result"></div>
-                <button id="restart">Play Again</button>
+                <button id="restart" onclick="location.reload()">RESTART</button>
+                <button id="restart" onclick="ticTacToe.resetBoard()">PLAY AGAIN</button>
             </dialog>
 
         </main>
