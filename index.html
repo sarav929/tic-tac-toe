@@ -6,15 +6,16 @@
     <title>Tic-tac-toe</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
 </head>
 <body>
-
-    <header><h1>Tic-Tac-Toe</h1></header>
-
     <div class="container">
+        <header id="header">
+            <h1>Pokémon</h1>
+            <h2>Tic-Tac-Toe</h2>       
+        </header>
 
         <div class="form-container">
-
             <form method="get" action="index.html" onsubmit="" id="create-players-form">
                 <h2>PLAYER 1</h2>
 
@@ -53,7 +54,7 @@
 
                 
 
-                <h2>PLAYER 2</h2>
+                <h2 class="divider">PLAYER 2</h2>
 
                 <label for="player2-name">Name
                     <input type="text" id="player2-name" required>
@@ -93,7 +94,7 @@
 
         </div>
 
-        <main> 
+        <main>
             <div class="player-container">
 
                 <h2 id="name1"></h2>
@@ -102,7 +103,7 @@
                 <h3 id="pokemon1-name"></h3>
 
             </div>
-        
+            
             <div class="board-container">
                 <div class="cell" id="0"></div>
                 <div class="cell" id="1"></div>
@@ -129,8 +130,13 @@
                 <button id="restart" onclick="location.reload()">RESTART</button>
                 <button id="restart" onclick="ticTacToe.resetBoard()">PLAY AGAIN</button>
             </dialog>
+            
 
         </main>
+
+        <footer> 
+            created by sarav929 | <a href="https://github.com/sarav929"><i class="devicon-github-original"></i></a> | icons by <a href="https://www.flaticon.com/authors/darius-dan">darius dan</a>
+        </footer>
 
     </div>
 

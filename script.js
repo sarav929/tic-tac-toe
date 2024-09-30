@@ -60,6 +60,8 @@ const ticTacToe = (() => {
             createPlayer(player2Name.value, player2Poke, 'o')]
             
             currentPlayer = players[0]
+            document.getElementById('pokemon1-img').classList.add('current-player')
+                document.getElementById('pokemon2-img').classList = ''
             board = gameBoard.getBoard()
             gameOver = false 
             winner = ""
@@ -75,7 +77,7 @@ const ticTacToe = (() => {
 
             document.querySelector('div.form-container').style.display = 'none'
             document.querySelector('main').style.display = 'grid'
-
+            
             startGame()
         })
     }
@@ -101,9 +103,13 @@ const ticTacToe = (() => {
             checkWin() 
 
             if (currentPlayer == players[0]) {
-                currentPlayer = players[1] 
+                currentPlayer = players[1]
+                document.getElementById('pokemon2-img').classList.add('current-player')
+                document.getElementById('pokemon1-img').classList = ''  
             } else {
                 currentPlayer = players[0]
+                document.getElementById('pokemon1-img').classList.add('current-player')
+                document.getElementById('pokemon2-img').classList = ''  
             }
             
         }      
@@ -152,12 +158,12 @@ const ticTacToe = (() => {
 
     const announceWinner = () => {   
         modal.showModal()
-        document.getElementById('result').innerHTML = `<p class="modal-p">${currentPlayer.name} won!</p>`
+        document.getElementById('result').innerHTML = `<h1>${currentPlayer.name.charAt(0).toUpperCase() + currentPlayer.name.slice(1)} won!</h1>`
     } 
 
     const announceTie = () => {
         modal.showModal()
-        document.getElementById('result').innerHTML = `<p class="modal-p">"It's a tie!"</p>`
+        document.getElementById('result').innerHTML = `<h1>It's a tie!</h1>`
     }
  
     return {initializeGame, startGame, handleClick, checkWin, announceWinner, announceTie, resetBoard}
