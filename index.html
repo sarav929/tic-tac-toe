@@ -11,52 +11,74 @@
 
     <div class="container">
 
-        <dialog class="create-player1">
-            <form method="dialog">
-                <label for="player1-name">
+        <div class="form-container">
+
+
+            <form method="get" action="index.html" onsubmit="" id="create-players-form">
+                <h2>Player 1</h2>
+                <label for="player1-name" name="name">Name:
                     <input type="text" id="player1-name">
                 </label>
+                <div class="pokemon-selection">
+                    <label>
+                        <input type="radio" name="pokemon1" id="bulbasaur" class="poke1">
+                        <img src="img/bulbasaur.png">
+                    </label>
+                      
+                    <label>
+                        <input type="radio" name="pokemon1" id="charmander" class="poke1">
+                        <img src="img/charmander.png">
+                    </label>
+
+                    <label>
+                        <input type="radio" name="pokemon1" id="pikachu" class="poke1">
+                        <img src="img/pikachu.png">
+                    </label>
+                </div>
+                
+
+                <h2>Player 2</h2>
+                <label for="player2-name">Name:
+                    <input type="text" id="player2-name">
+                </label>
+                <div class="pokemon-selection">
+                    <label>
+                        <input type="radio" name="pokemon2" id="eevee" class="poke2">
+                        <img src="img/eevee.png">
+                    </label>
+                      
+                    <label>
+                        <input type="radio" name="pokemon2" id="oddish" class="poke2">
+                        <img src="img/oddish.png">
+                    </label>
+
+                    <label>
+                        <input type="radio" name="pokemon2" id="ditto" class="poke2">
+                        <img src="img/ditto.png">
+                    </label>
+                </div>
+
+                <button type="submit" id="start-btn">Confirm</button>
+
+                
             </form>
-        </dialog>
+
+        </div>
 
         <header><h1>Tic-Tac-Toe</h1></header>
 
-        <main>
-            <div class="create-players">
-
-                <div id="create-player1">
-                    <h1>Player 1</h1>
-                    <form class="player1-form">
-                        <label for="name">
-                            <input type="text" id="name1">
-                        </label>
-                        <div class="pokemon-choice1">
-                            <input type="button">
-                            <input type="button">
-                            <input type="button">
-                        </div>
-                        <button type="submit">Next</button>
-                    </form>
-                </div>
-
-                <div id="create-player2">
-                    <h1>Player 2</h1>
-                    <form class="player2-form">
-                        <label for="name">
-                            <input type="text" id="name">
-                        </label>
-                        <div class="pokemon-choice2">
-                            <input type="button">
-                            <input type="button">
-                            <input type="button">
-                        </div>
-                        <button type="submit">Start</button>
-                    </form>
-                </div>
-
-            </div>
+        <main> 
+        
             <div class="board-container">
-
+                <div class="cell" id="0"></div>
+                <div class="cell" id="1"></div>
+                <div class="cell" id="2"></div>
+                <div class="cell" id="3"></div>
+                <div class="cell" id="4"></div>
+                <div class="cell" id="5"></div>
+                <div class="cell" id="6"></div>
+                <div class="cell" id="7"></div>
+                <div class="cell" id="8"></div>
             </div>
 
             <dialog class="gameover">

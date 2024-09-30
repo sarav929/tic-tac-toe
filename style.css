@@ -13,11 +13,69 @@ body {
     align-items: center;
 }
 
+select {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    & form {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    & label {
+        display: flex;
+        gap: 5px;
+        flex-direction: column;
+        
+    }
+}
+
+.pokemon-selection {
+    width: fit-content;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    flex-direction: row;
+    gap: 20px;
+
+    & img {
+        width: 10rem;
+    }
+
+}
+
+/* HIDE RADIO */
+[type=radio] { 
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* IMAGE STYLES */
+  [type=radio] + img {
+    cursor: pointer;
+    width: 7rem;
+  }
+  
+  /* CHECKED STYLES */
+  [type=radio]:checked + img {
+    outline: 5px solid #f00;
+  }
+
 .board-container {
     border: 2px solid black;
     width: 600px;
     height: 600px;
-    display: none; /*grid*/
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
 }
@@ -28,17 +86,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    & img {
+        width: 8rem;
+    }
 }
 
 .winner-accouncement { 
     border: 2px blue solid;
     height: 200px
-}
-
-.player1 {
-    background-color: blueviolet;
-}
-
-.player2 {
-    background-color: black;
 }

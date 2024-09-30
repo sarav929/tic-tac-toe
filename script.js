@@ -13,41 +13,62 @@ const gameBoard = (() => {
 
 })()
 
-const createPlayer = (name, score = 0, symbol) => {
-    return { name, score, symbol }
+const createPlayer = (name, pokemon, symbol) => {
+    return { name, pokemon, symbol }
 }
     
 const ticTacToe = (() => {
 
-    let gameOver
     let players = []
     let currentPlayer
+    let gameOver
     let winner
-    
+
+    const initializeGame = () => {
+
+        let form = document.getElementById('create-players-form')
+        let player1Name = document.getElementById('player1-name')
+        let pokeSel1 = document.getElementsByClassName('poke1')
+        let player1Poke
+
+        let form2 = document.getElementById('create-player2')
+        let player2Name = document.getElementById('player2-name')
+        let pokeSel2 = document.getElementsByClassName('poke2')
+        let player2Poke
+
+       form.addEventListener('submit', (e) => {
+            e.preventDefault()
+
+            for (poke of pokeSel1) {
+                if (poke.checked) {
+                    player1Poke = poke.id
+                }
+            }
+
+            for (poke of pokeSel2) {
+                if (poke.checked) {
+                    player2Poke = poke.id
+                }
+            }
+
+            players = [createPlayer(player1Name.value, player1Poke, 'x'), 
+            createPlayer(player2Name.value, player2Poke, 'o')]
+            
+            currentPlayer = players[0]
+            board = gameBoard.getBoard()
+            gameOver = false 
+            winner = ""
+            form.reset()
+            startGame()
+        })
+    }
+
     const startGame = () => {
-        board = gameBoard.getBoard()
-        players = [createPlayer("player1", 0, "x"), createPlayer("player2", 0, "o")]
-        currentPlayer = players[0]
-        gameOver = false 
-        winner = ""
-        
+        console.log(players)
         let cells = document.querySelectorAll(".cell")
         
         for (let cell of cells) {
             cell.addEventListener('click', handleClick)
-        }
-    }
-
-    const resetBoard = () => { 
-
-        for (i = 0; i < 9; i++) {
-            gameBoard.updateBoard(i, "")
-        }
-
-        let cells = document.querySelectorAll(".cell")
-        
-        for (let cell of cells) {
-            cell.classList = "cell"
         }
     }
 
@@ -59,14 +80,28 @@ const ticTacToe = (() => {
 
         if (board[index] == "") {
             gameBoard.updateBoard(index, currentPlayer.symbol)
-            cell.classList.add(currentPlayer.name)
+            cell.innerHTML = `<img src="img/${currentPlayer.pokemon}-s.png">`
+            checkWin() 
+            
             if (currentPlayer == players[0]) {
                 currentPlayer = players[1] 
             } else {
                 currentPlayer = players[0]
             }
-            ticTacToe.checkWin() 
+            
         }      
+    }
+
+    const resetBoard = () => { 
+
+        for (i = 0; i < 9; i++) {
+            gameBoard.updateBoard(i, "")
+        }
+
+        let cells = document.querySelectorAll(".cell")
+        for (let cell of cells) {
+            cell.innerHTML = ""
+        }
     }
 
     const checkWin = () => {
@@ -82,28 +117,25 @@ const ticTacToe = (() => {
             if (subString.every((el) => el == "o") || subString.every((el) => el == "x")) {
                 gameOver = true
                 winner = currentPlayer
-                ticTacToe.announceWinner()
+                announceWinner()
             } else if (!board.includes("") && winner == "") {
                 gameOver = true
-                ticTacToe.announceTie()
+                announceTie()
             }      
         })
     }
 
     const announceWinner = () => {
         console.log(`${currentPlayer.name} won!`)
-
-        ticTacToe.resetBoard()
     } 
 
     const announceTie = () => {
         console.log("It's a tie!")
-
-        ticTacToe.resetBoard()
     }
  
-    return {startGame, handleClick, checkWin, announceWinner, announceTie, resetBoard}
+    return {initializeGame, startGame, handleClick, checkWin, announceWinner, announceTie, resetBoard}
 
 })()
 
-ticTacToe.startGame()   
+
+ticTacToe.initializeGame()
