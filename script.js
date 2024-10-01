@@ -76,7 +76,7 @@ const ticTacToe = (() => {
             document.getElementById('pokemon2-name').innerText = players[1].pokemon.charAt(0).toUpperCase() + players[1].pokemon.slice(1)
 
             document.querySelector('div.form-container').style.display = 'none'
-            document.querySelector('main').style.display = 'grid'
+            document.querySelector('main').style.display = 'flex'
             
             startGame()
         })

@@ -27,6 +27,8 @@ button {
     padding: 10px 20px;
     margin-top: 30px;
     background-color: white;
+    color:black;
+    border: 2px solid black;
 }
 
 button:hover {
@@ -61,7 +63,10 @@ header {
 
 main {
     display: none;
-    grid-template-columns: repeat(3, minmax(300px, 1fr));
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 100px;
+    
 }
 
 footer {
@@ -221,9 +226,9 @@ label, p {
 
 .board-container {
     background-color: black;
-    width: 600px;
-    height: 600px;
     display: grid;
+    min-width: 600px;
+    min-height: 600px;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     gap: 3px;
@@ -242,6 +247,57 @@ label, p {
 
 .cell:hover {
     filter: brightness(110%);
+}
+
+@media screen and (max-width: 850px) {
+
+    .board-container {
+        min-width: 350px;
+        min-height: 350px;
+    }
+
+    .cell {
+
+        & img {
+            width: 5rem;
+        }
+    }
+
+    main {
+        gap: 20px;   
+        flex-direction: column; 
+    }
+
+    .player-container {
+        & img {
+            max-width: 100px;
+        }
+    }
+
+    .pokemon-selection {
+        gap: 5px;
+        & img {
+            
+        }
+    }
+}
+
+@media screen and (max-width: 1300px) {
+
+    .board-container {
+        min-width: 400px;
+        min-height: 400px;
+    }
+
+    main {
+        gap: 20px;
+    }
+
+    .player-container {
+        & img {
+            max-width: 150px;
+        }
+    }
 }
 
 
