@@ -92,6 +92,8 @@ const ticTacToe = (() => {
     }
 
     const handleClick = (event) => {
+
+        if (gameOver) return
         
         let cell = event.target
         let index = cell.id
@@ -116,22 +118,24 @@ const ticTacToe = (() => {
     }
 
     const resetBoard = () => { 
-
         modal.close()
-        currentPlayer = winner
+        currentPlayer = players[0]
         board = gameBoard.getBoard()
         gameOver = false 
         winner = ""
-
-        for (i = 0; i < 9; i++) {
+    
+        for (let i = 0; i < 9; i++) {
             gameBoard.updateBoard(i, "")
         }
-
+    
         let cells = document.querySelectorAll(".cell")
         for (let cell of cells) {
             cell.innerHTML = ""
         }
-
+    
+        document.getElementById('pokemon1-img').classList.add('current-player')
+        document.getElementById('pokemon2-img').classList = ''  
+    
         startGame()
     }
 
